@@ -1,0 +1,43 @@
+server:
+  port: 8086
+
+spring:
+  datasource:
+    url: jdbc:mysql://120.76.133.50:3306/sport?useUnicode=true&characterEncoding=UTF-8&serverTimeZone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  redis:
+    port: 6379
+    host: localhost
+
+  mail:
+    host: smtp.163.com
+    username: yuxi1833769@163.com
+    password: EPPNCQAWENRUBUPA
+    default-encoding: UTF-8
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# jwt配置
+jwt:
+  # 请求头
+  tokenHeader: Authorization
+  # 签名加盐
+  secret: ajiehencai123
+  #JWT过期时间
+  expiration: 36000
+  # token头部
+  tokenHead: 'Bearer '
+
+alioss:
+  endpoint: oss-cn-chengdu.aliyuncs.com
+  accessKeyId: LTAI5tSYoRVCRZqvXhiS8Eco
+  accessKeySecret: rDufx9Y8nMg3jQrZDx7rbzTxz19oQV
+  bucketName: admin-yuxi-parent
+
+
+
