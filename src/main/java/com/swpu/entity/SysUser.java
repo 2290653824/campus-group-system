@@ -40,7 +40,7 @@ public class SysUser implements UserDetails {
     private Long id;
 
     @ApiModelProperty(value = "登录名")
-    private String userName;
+    private String username;
 
     @ApiModelProperty(value = "密码")
     private String password;
@@ -117,7 +117,7 @@ public class SysUser implements UserDetails {
      */
     @Override
     public String getUsername() {
-        return userName;
+        return username;
     }
 
     /**
