@@ -20,6 +20,7 @@ public class SecurityConstant {
             "/v2/api-docs-ext",
             "/configuration/ui",
             "/configuration/security",
+            "/favicon.ico",
 
             //微信小程序资源
             "/user/wxlogin",
@@ -33,7 +34,7 @@ public class SecurityConstant {
             "/getCaptchaOpen",
 
             //前端的
-            "/favicon.ico",
+
 
             //找回密码
             "/tool/forgetPassword"
