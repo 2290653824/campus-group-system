@@ -1,8 +1,11 @@
 package com.swpu.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.util.List;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -11,7 +14,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author Liyuxi
@@ -38,5 +41,12 @@ public class SysRole implements Serializable {
     @ApiModelProperty(value = "显示状态(0不显示、1显示)")
     private Boolean status;
 
+    @ApiModelProperty(value = "菜单列表")
+    @TableField(exist = false)
+    private List<SysMenu> menus;
+
+    @ApiModelProperty(value = "权限列表")
+    @TableField(exist = false)
+    private List<SysPermission> permissions;
 
 }

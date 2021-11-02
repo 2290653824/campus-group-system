@@ -10,6 +10,7 @@ public class SecurityConstant {
             "/user/login",
             "/user/logout",
             "/oauth/**",
+            "/test",
 
             //swagger相关的
             "/doc.html",
