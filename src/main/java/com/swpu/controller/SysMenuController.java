@@ -61,7 +61,7 @@ public class SysMenuController {
         if (b){
             return Result.success("删除成功!");
         }
-        return Result.success("删除失败!");
+        return Result.fail("删除失败!");
     }
 
 }
