@@ -9,6 +9,7 @@ import com.swpu.service.SysPermissionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -46,6 +47,7 @@ public class SysPermissionController {
         return sysPermissionService.findPage(queryInfo);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @GetMapping("delete/{id}")
     @ApiOperation("删除权限")
     public Result delete(@PathVariable("id") Long id){
