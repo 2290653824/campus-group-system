@@ -49,7 +49,7 @@ public class SysUser implements UserDetails {
     private String nickName;
 
     @ApiModelProperty(value = "性别(0男，1女，2未知)")
-    private Boolean sex;
+    private Integer sex;
 
     @ApiModelProperty(value = "用户头像")
     private String avatar;
