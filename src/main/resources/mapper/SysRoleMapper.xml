@@ -7,7 +7,7 @@
         FROM sys_role
         WHERE status = 1 AND
         id IN
-        (SELECT  FROM user_roles WHERE user_id = #{id})
+        (SELECT role_id FROM user_roles WHERE user_id = #{id})
     </select>
     <select id="getRoleByUserId" resultType="com.swpu.entity.SysRole">
         SELECT id,label,code,status
