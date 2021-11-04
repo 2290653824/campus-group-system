@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+import java.util.Date;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
@@ -39,7 +40,7 @@ public class ProductRemark implements Serializable {
     private String context;
 
     @TableField("createTime")
-    private LocalDate createTime;
+    private Date createTime;
     @ApiModelProperty("回复人的主键")
     private Integer replyId;
     @ApiModelProperty("父评论的主键")
