@@ -5,7 +5,7 @@
         update product_remark set is_delete=1 where id = #{id}
     </update>
     <select id="findChildrenProRemark" resultType="com.swpu.entity.ProductRemark">
-        SELECT *
+        SELECT id,user_id,product_id,context,createTime,reply_id,parent_id
         FROM product_remark
         WHERE parent_id = #{id} and is_delete = 0
     </select>
