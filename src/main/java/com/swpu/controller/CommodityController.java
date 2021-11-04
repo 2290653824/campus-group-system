@@ -1,7 +1,9 @@
 package com.swpu.controller;
 
 
+import com.swpu.common.QueryInfo;
 import com.swpu.common.Result;
+import com.swpu.dto.CommodityAddDTO;
 import com.swpu.entity.Commodity;
 import com.swpu.service.CommodityService;
 import io.swagger.annotations.Api;
@@ -39,18 +41,18 @@ public class CommodityController {
         return commodityService.SelectById(id);
     }
 
-    @ApiOperation("根据名字查找商品")
-    @PostMapping("/findByName/{name}")
-    public Result findByName(@PathVariable String name){
-        return commodityService.findByName(name);
+    @ApiOperation("分页条件查询")
+    @PostMapping("/findPage")
+    public Result findPage(@RequestBody QueryInfo queryInfo){
+        return commodityService.findPage(queryInfo);
     }
 
 
-//    @ApiOperation("添加商品")
-//    @PostMapping("/insertCommodity")
-//    public Result insertCommodity(@RequestBody Commodity commodity){
-//        return commodityService.insertCommodity(commodity);
-//    }
+    @ApiOperation("添加商品")
+    @PostMapping("/insertCommodity")
+    public Result insertCommodity(@RequestBody CommodityAddDTO dto){
+        return commodityService.insertCommodity(dto);
+    }
 
 
 

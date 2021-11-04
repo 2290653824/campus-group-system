@@ -1,6 +1,8 @@
 package com.swpu.service;
 
+import com.swpu.common.QueryInfo;
 import com.swpu.common.Result;
+import com.swpu.dto.CommodityAddDTO;
 import com.swpu.entity.Commodity;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.apache.ibatis.annotations.Param;
@@ -18,12 +20,6 @@ import java.io.Serializable;
 public interface CommodityService extends IService<Commodity> {
 
 
-    /**
-     * 根据名称查找商品
-     * @return Commodity
-     */
-    Result findByName(@Param("name") String name);
-
 
     /**
      * 根据id查找商品
@@ -35,11 +31,11 @@ public interface CommodityService extends IService<Commodity> {
 
     /**
      * 添加商品
-     * @param commodity
+     * @param dto
      * @return 影响行数
      */
 
-    Result insertCommodity(@Param("commodity") Commodity commodity);
+    Result insertCommodity(CommodityAddDTO dto);
 
     /**
      * 根据id删除商品
@@ -48,4 +44,10 @@ public interface CommodityService extends IService<Commodity> {
      */
     Result deleteById(@Param("id") Integer id);
 
+    /**
+     * 分页条件查询
+     * @param queryInfo
+     * @return
+     */
+    Result findPage(QueryInfo queryInfo);
 }

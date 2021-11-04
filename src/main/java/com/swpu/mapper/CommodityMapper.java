@@ -24,28 +24,4 @@ public interface CommodityMapper extends BaseMapper<Commodity> {
      */
     List<Commodity> findByName(@Param("name") String name);
 
-
-    /**
-     * 根据id查找商品
-     * @param id
-     * @return Commodity
-     */
-    @Override
-    Commodity selectById(@Param("id") Serializable id);
-
-    /**
-     * 根据id删除商品
-     * @param id
-     * @return 影响行数
-     */
-    int deleteById(@Param("id") Integer id);
-
-
-    /**
-     * 添加商品
-     * @param commodity
-     * @return 影响行数
-     */
-    @Override
-    int insert(@Param("commodity") Commodity commodity);
 }

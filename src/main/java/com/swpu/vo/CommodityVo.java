@@ -1,13 +1,6 @@
-package com.swpu.entity;
-
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+package com.swpu.vo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
-import java.util.Date;
-
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
@@ -16,24 +9,19 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-/**
- * <p>
- *
- * </p>
- *
- * @author Liyuxi
- * @since 2021-11-03
- */
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
+
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="Commodity对象", description="")
-public class Commodity implements Serializable {
+@ApiModel(value="商品回显Vo", description="")
+public class CommodityVo implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 3346706280665999651L;
 
     @ApiModelProperty(value = "主键")
-    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     @ApiModelProperty(value = "商品名称")
@@ -67,6 +55,5 @@ public class Commodity implements Serializable {
     @ApiModelProperty(value = "修改时间")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date updateTime;
-
 
 }
