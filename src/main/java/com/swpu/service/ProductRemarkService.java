@@ -1,5 +1,6 @@
 package com.swpu.service;
 
+import com.swpu.common.QueryInfo;
 import com.swpu.common.Result;
 import com.swpu.dto.ProductRemarkDTO;
 import com.swpu.entity.ProductRemark;
@@ -34,4 +35,10 @@ public interface ProductRemarkService extends IService<ProductRemark> {
      * @return
      */
     Result pdelRemark(Integer id);
+    /**
+     * 分页查询获取
+     * @param queryInfo
+     * @return
+     */
+    Result pdelFindPages(QueryInfo queryInfo);
 }

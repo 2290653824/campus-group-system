@@ -1,13 +1,20 @@
 package com.swpu.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.swpu.common.QueryInfo;
 import com.swpu.common.Result;
 import com.swpu.dto.ProductRemarkDTO;
 import com.swpu.entity.ProductRemark;
+import com.swpu.entity.SysMenu;
 import com.swpu.mapper.ProductRemarkMapper;
 import com.swpu.service.ProductRemarkService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.swpu.utils.BeanCopyUtil;
 import com.swpu.utils.DateUtil;
+import com.swpu.vo.MenuVo;
+import com.swpu.vo.ProRemarkVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,10 +23,11 @@ import org.springframework.util.StringUtils;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author Liyuxi
@@ -33,7 +41,7 @@ public class ProductRemarkServiceImpl extends ServiceImpl<ProductRemarkMapper, P
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Result delRemark(Integer id) {
-        if(id==null) {
+        if (id == null) {
             return Result.fail("传入参数异常");
         }
         //根据id获取评论
@@ -64,13 +72,38 @@ public class ProductRemarkServiceImpl extends ServiceImpl<ProductRemarkMapper, P
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Result pdelRemark(Integer id) {
-        if (id == null){
+        if (id == null) {
             return Result.fail("参数异常");
         }
         boolean b = this.removeById(id);
-        if (b){
+        if (b) {
             return Result.success("删除成功");
         }
         return Result.fail("删除失败");
+    }
+
+    @Override
+    public Result pdelFindPages(QueryInfo queryInfo) {
+        //如果没有传分页参数，则默认第一页，每页10条数据
+        queryInfo.setPageNumber(0 == queryInfo.getPageNumber() ? 1 : queryInfo.getPageNumber());
+        queryInfo.setPageSize(0 == queryInfo.getPageSize() ? 10 : queryInfo.getPageSize());
+        Page<ProductRemark> page = new Page<>(queryInfo.getPageNumber(), queryInfo.getPageSize());
+        QueryWrapper<ProductRemark> qw = new QueryWrapper<>();
+        if (StringUtils.hasText(queryInfo.getQueryString())) {
+            qw.like("user_name", queryInfo.getQueryString());
+        }
+        qw.isNull("parent_id");
+        IPage<ProductRemark> iPage = super.page(page, qw);
+        long total = iPage.getTotal();
+        List<ProductRemark> records = iPage.getRecords();
+        List<ProRemarkVo> proRemarkVos = BeanCopyUtil.copyList(records, ProRemarkVo.class);
+        proRemarkVos.forEach(data -> {
+            List<ProductRemark> childrenProRemark = productRemarkMapper.findChildrenProRemark(data.getId());
+            data.setChildren(childrenProRemark);
+        });
+        Page<ProRemarkVo> voPage = new Page<>();
+        voPage.setTotal(total);
+        voPage.setRecords(proRemarkVos);
+        return Result.success("分页数据", voPage);
     }
 }

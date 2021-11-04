@@ -1,36 +1,29 @@
-package com.swpu.entity;
-
-import java.time.LocalDate;
+package com.swpu.vo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
-
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.swpu.entity.ProductRemark;
+import com.swpu.entity.SysMenu;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-/**
- * <p>
- *
- * </p>
- *
- * @author Liyuxi
- * @since 2021-11-04
- */
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="ProductRemark对象", description="")
-public class ProductRemark implements Serializable {
+@ApiModel(value = "评论回显Vo", description = "")
+public class ProRemarkVo implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -8288679313742177813L;
 
     @ApiModelProperty(value = "主键")
     @TableId(value = "id", type = IdType.AUTO)
@@ -45,7 +38,7 @@ public class ProductRemark implements Serializable {
     @ApiModelProperty("评论内容")
     private String context;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @TableField("createTime")
     private Date createTime;
 

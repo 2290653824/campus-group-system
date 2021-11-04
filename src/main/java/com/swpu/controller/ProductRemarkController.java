@@ -1,6 +1,7 @@
 package com.swpu.controller;
 
 
+import com.swpu.common.QueryInfo;
 import com.swpu.common.Result;
 import com.swpu.dto.ProductRemarkDTO;
 import com.swpu.service.ProductRemarkService;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author Liyuxi
@@ -33,10 +34,10 @@ public class ProductRemarkController {
     @ApiOperation("增加评论")
     @PostMapping("/add")
     public Result addReamrk(@RequestBody ProductRemarkDTO productRemarkDTO) {
-        if(productRemarkDTO==null) {
-          return Result.fail("参数有问题");
+        if (productRemarkDTO == null) {
+            return Result.fail("参数有问题");
         } else {
-            Result result=productRemarkService.addReamrk(productRemarkDTO);
+            Result result = productRemarkService.addReamrk(productRemarkDTO);
             return result;
         }
     }
@@ -44,11 +45,17 @@ public class ProductRemarkController {
     @ApiOperation("删除评论(永久删除)")
     @PostMapping("/pdel/{id}")
     public Result pdelRemark(@PathVariable("id") Integer id) {
-        if(id<0||id==null) {
+        if (id < 0 || id == null) {
             return Result.fail("传入参数有问题");
         } else {
-            Result result=productRemarkService.pdelRemark(id);
+            Result result = productRemarkService.pdelRemark(id);
             return result;
         }
+    }
+
+    @ApiOperation(value = "获取评论")
+    @PostMapping(value = "/findPages")
+    public Result pdelFindPages(@RequestBody QueryInfo queryInfo) {
+        return productRemarkService.pdelFindPages(queryInfo);
     }
 }
