@@ -23,15 +23,11 @@ import org.springframework.web.bind.annotation.*;
 public class ProductRemarkController {
     @Autowired
     private ProductRemarkService productRemarkService;
+
     @PostMapping(value = "/del/{id}")
     @ApiOperation("删除评论(普通删除)")
     public Result delRemark(@PathVariable("id") Integer id) {
-        if(id<0||id==null) {
-            return Result.fail("参数有问题");
-        } else {
-            Result result=productRemarkService.delRemark(id);
-            return result;
-        }
+        return productRemarkService.delRemark(id);
     }
 
     @ApiOperation("增加评论")

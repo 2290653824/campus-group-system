@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -16,7 +17,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author Liyuxi
@@ -29,24 +30,31 @@ import lombok.experimental.Accessors;
 public class ProductRemark implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @ApiModelProperty(value = "主键")
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
-   @ApiModelProperty(value = "用户主键")
+
+    @ApiModelProperty(value = "用户主键")
     private Integer userId;
+
     @ApiModelProperty("产品主键")
     private Integer productId;
+
     @ApiModelProperty("评论内容")
     private String context;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     @TableField("createTime")
     private Date createTime;
+
     @ApiModelProperty("回复人的主键")
     private Integer replyId;
+
     @ApiModelProperty("父评论的主键")
     private Integer parentId;
+
     @ApiModelProperty("是否删除标记")
     private Boolean isDelete;
-
 
 }
