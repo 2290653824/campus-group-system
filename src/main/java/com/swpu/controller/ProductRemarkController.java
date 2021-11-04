@@ -24,7 +24,7 @@ public class ProductRemarkController {
     @Autowired
     private ProductRemarkService productRemarkService;
     @PostMapping(value = "/del/{id}")
-    @ApiOperation("删除评论")
+    @ApiOperation("删除评论(普通删除)")
 public Result delRemark(@PathVariable Integer id)
 {
     if(id<0||id==null)
@@ -50,4 +50,17 @@ public Result addReamrk(@RequestBody ProductRemarkDTO productRemarkDTO)
         return result;
     }
 }
+    @ApiOperation("删除评论(永久删除)")
+    @PostMapping("/pdel/{id}")
+    public Result pdelRemark(@PathVariable Integer id)
+    {
+        if(id<0||id==null)
+        {
+            return Result.fail("传入参数有问题");
+        }
+        else {
+            Result result=productRemarkService.pdelRemark(id);
+            return result;
+        }
+    }
 }

@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.swpu.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,6 +28,7 @@ public class ProductRemarkServiceImpl extends ServiceImpl<ProductRemarkMapper, P
     @Autowired
     private ProductRemarkMapper productRemarkMapper;
      @Override
+     @Transactional
     public Result delRemark(Integer id) {
         if(id==null||id<0)
         {
@@ -46,6 +48,7 @@ public class ProductRemarkServiceImpl extends ServiceImpl<ProductRemarkMapper, P
     }
 
     @Override
+    @Transactional
     public Result addReamrk(ProductRemarkDTO productRemarkDTO) {
         if (productRemarkDTO==null)
         {
@@ -72,12 +75,6 @@ public class ProductRemarkServiceImpl extends ServiceImpl<ProductRemarkMapper, P
             productRemark.setProductId(productRemarkDTO.getProductId());
             productRemark.setParentId(productRemarkDTO.getParentId());
             SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-           /* Date date=new Date();
-            try {
-                date=sdf2.parse(date.toString());
-            } catch (ParseException e) {
-                return Result.fail("时间处理异常",e.getMessage());
-            }*/
             productRemark.setCreateTime(new Date());
             int count=productRemarkMapper.insert(productRemark);
             if(count==0)
@@ -90,6 +87,29 @@ public class ProductRemarkServiceImpl extends ServiceImpl<ProductRemarkMapper, P
             }
             else {
                 return Result.success("添加成功");
+            }
+        }
+    }
+
+    @Override
+    @Transactional
+    public Result pdelRemark(Integer id) {
+        if(id<0||id==null)
+        {
+            return Result.fail("传入参数有问题");
+        }
+        else {
+            int count=productRemarkMapper.deleteById(id);
+            if (count==0)
+            {
+                return Result.fail("该商品可能已经删除");
+            }
+            else if (count!=1)
+            {
+              return   Result.fail("删除发生异常");
+            }
+            else {
+                return Result.success("删除成功");
             }
         }
     }

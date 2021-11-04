@@ -18,4 +18,6 @@ public interface ProductRemarkService extends IService<ProductRemark> {
     Result delRemark(Integer id);
 
     Result addReamrk(ProductRemarkDTO productRemarkDTO);
+
+    Result pdelRemark(Integer id);
 }
