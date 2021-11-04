@@ -12,6 +12,7 @@ import com.swpu.mapper.CommodityMapper;
 import com.swpu.service.CommodityService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.swpu.utils.BeanCopyUtil;
+import com.swpu.utils.SecurityUtil;
 import com.swpu.vo.CommodityVo;
 import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +89,18 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
         voPage.setRecords(commodityVos);
         voPage.setTotal(total);
         return Result.success("分页参数",voPage);
+    }
+
+    @Override
+    public Result updateCommodity(CommodityAddDTO dto) {
+        if(dto == null){
+            return Result.fail("参数异常");
+        }
+        Commodity commodity=BeanCopyUtil.copyObject(dto,Commodity.class);
+        commodity.setUpdateTime(new Date());
+        this.updateById(commodity);
+        return Result.success("修改成功");
+
     }
 
 

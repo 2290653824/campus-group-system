@@ -54,7 +54,11 @@ public class CommodityController {
         return commodityService.insertCommodity(dto);
     }
 
-
+    @ApiOperation(("修改商品"))
+    @PostMapping("/updateCommodity")
+    public Result updateCommodity(CommodityAddDTO dto){
+        return commodityService.updateCommodity(dto);
+    }
 
 
 }

@@ -50,4 +50,12 @@ public interface CommodityService extends IService<Commodity> {
      * @return
      */
     Result findPage(QueryInfo queryInfo);
+
+
+    /**
+     * 修改商品
+     * @param dto
+     * @return
+     */
+    Result updateCommodity(CommodityAddDTO dto);
 }
