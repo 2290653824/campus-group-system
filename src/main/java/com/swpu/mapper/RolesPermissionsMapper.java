@@ -3,6 +3,7 @@ package com.swpu.mapper;
 import com.swpu.entity.RolesPermissions;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -14,5 +15,9 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface RolesPermissionsMapper extends BaseMapper<RolesPermissions> {
-
+    /**
+     * 删除旧角色-权限
+     * @param roleId
+     */
+    void deleteOldPer(@Param("roleId") Long roleId);
 }

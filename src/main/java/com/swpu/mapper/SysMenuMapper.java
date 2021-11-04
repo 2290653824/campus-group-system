@@ -23,4 +23,11 @@ public interface SysMenuMapper extends BaseMapper<SysMenu> {
      * @return
      */
     List<SysMenu> findChildrenMenu(@Param("id") Long id);
+
+    /**
+     * 根据角色id查询父菜单
+     * @param id
+     * @return
+     */
+    List<SysMenu> findMenuByRoleId(@Param("id") Long id);
 }
