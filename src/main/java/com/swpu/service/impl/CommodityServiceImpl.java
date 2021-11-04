@@ -97,7 +97,6 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
             return Result.fail("参数异常");
         }
         Commodity commodity=BeanCopyUtil.copyObject(dto,Commodity.class);
-        commodity.setCreateTime(new Date());
         commodity.setUpdateTime(new Date());
         this.updateById(commodity);
         return Result.success("修改成功");
