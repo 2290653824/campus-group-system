@@ -3,6 +3,7 @@ package com.swpu.mapper;
 import com.swpu.entity.RolesMenus;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -14,5 +15,9 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface RolesMenusMapper extends BaseMapper<RolesMenus> {
-
+    /**
+     * 删除旧的角色-菜单
+     * @param roleId
+     */
+    void deleteOleMenu(@Param("roleId") Long roleId);
 }

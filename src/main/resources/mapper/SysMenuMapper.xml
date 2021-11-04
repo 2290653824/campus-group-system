@@ -7,4 +7,11 @@
         FROM sys_menu
         WHERE parent_id = #{id}
     </select>
+    <select id="findMenuByRoleId" resultType="com.swpu.entity.SysMenu">
+        SELECT id,`path`,icon,title,component,parent_id,status
+        FROM sys_menu
+        WHERE parent_id is null AND status = 1
+        AND id IN
+            (SELECT menu_id FROM roles_menus WHERE role_id = #{id})
+    </select>
 </mapper>
