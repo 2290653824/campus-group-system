@@ -2,4 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.swpu.mapper.CommodityMapper">
 
+    <select id="findByName" parameterType="String" resultType="com.swpu.entity.Commodity">
+    SELECT id,name,type,createTime,description,brand,price,pic_path,user_id,count,updateTime
+    FROM commodity
+    WHERE name = #{name}
+    </select>
+
+
+
+
+
 </mapper>
