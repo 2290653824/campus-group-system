@@ -36,4 +36,11 @@ public interface SysRoleService extends IService<SysRole> {
      * @return
      */
     Result findPage(QueryInfo queryInfo);
+
+    /**
+     * 删除角色
+     * @param id
+     * @return
+     */
+    Result deleteRole(Long id);
 }

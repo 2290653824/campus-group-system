@@ -46,18 +46,11 @@ public class SysRoleController {
         return sysRoleService.findPage(queryInfo);
     }
 
-    @Transactional(rollbackFor = Exception.class)
+
     @GetMapping("delete/{id}")
     @ApiOperation("删除")
     public Result delete(@PathVariable("id") Long id){
-        if (id == null){
-            return Result.fail("参数异常");
-        }
-        boolean b = sysRoleService.removeById(id);
-        if (b){
-            return Result.success("删除成功");
-        }
-        return Result.fail("删除失败");
+        return sysRoleService.deleteRole(id);
     }
 
 }

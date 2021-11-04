@@ -37,9 +37,6 @@ import java.util.List;
 public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> implements SysRoleService {
 
     @Autowired
-    private SysRoleMapper sysRoleMapper;
-
-    @Autowired
     private RolesMenusService rolesMenusService;
 
     @Autowired
@@ -170,5 +167,21 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         resultPage.setTotal(total);
         resultPage.setRecords(voList);
         return Result.success("分页数据",resultPage);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public Result deleteRole(Long id) {
+        if (id == null){
+            return Result.fail("参数异常");
+        }
+        //先删除关联表的关联关系
+        rolesMenusMapper.deleteOleMenu(id);
+        rolesPermissionsMapper.deleteOldPer(id);
+        boolean b = this.removeById(id);
+        if (b){
+            return Result.success("删除成功");
+        }
+        return Result.fail("删除失败");
     }
 }
