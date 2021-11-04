@@ -90,7 +90,7 @@ public class ProductRemarkServiceImpl extends ServiceImpl<ProductRemarkMapper, P
         Page<ProductRemark> page = new Page<>(queryInfo.getPageNumber(), queryInfo.getPageSize());
         QueryWrapper<ProductRemark> qw = new QueryWrapper<>();
         if (StringUtils.hasText(queryInfo.getQueryString())) {
-            qw.like("user_name", queryInfo.getQueryString());
+            qw.like("context", queryInfo.getQueryString());
         }
         qw.isNull("parent_id");
         IPage<ProductRemark> iPage = super.page(page, qw);
