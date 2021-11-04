@@ -25,7 +25,7 @@ public class ProductRemarkController {
     private ProductRemarkService productRemarkService;
     @PostMapping(value = "/del/{id}")
     @ApiOperation("删除评论(普通删除)")
-    public Result delRemark(@PathVariable Integer id) {
+    public Result delRemark(@PathVariable("id") Integer id) {
         if(id<0||id==null) {
             return Result.fail("参数有问题");
         } else {
