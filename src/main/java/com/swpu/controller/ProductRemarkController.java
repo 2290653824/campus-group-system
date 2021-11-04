@@ -25,40 +25,32 @@ public class ProductRemarkController {
     private ProductRemarkService productRemarkService;
     @PostMapping(value = "/del/{id}")
     @ApiOperation("删除评论(普通删除)")
-public Result delRemark(@PathVariable Integer id)
-{
-    if(id<0||id==null)
-    {
-        return Result.fail("参数有问题");
-    }
-    else {
-        Result result=productRemarkService.delRemark(id);
-        return result;
+    public Result delRemark(@PathVariable Integer id) {
+        if(id<0||id==null) {
+            return Result.fail("参数有问题");
+        } else {
+            Result result=productRemarkService.delRemark(id);
+            return result;
+        }
     }
 
-}
-@ApiOperation("增加评论")
-@PostMapping("/add")
-public Result addReamrk(@RequestBody ProductRemarkDTO productRemarkDTO)
-{
-    if(productRemarkDTO==null)
-    {
-      return Result.fail("参数有问题");
+    @ApiOperation("增加评论")
+    @PostMapping("/add")
+    public Result addReamrk(@RequestBody ProductRemarkDTO productRemarkDTO) {
+        if(productRemarkDTO==null) {
+          return Result.fail("参数有问题");
+        } else {
+            Result result=productRemarkService.addReamrk(productRemarkDTO);
+            return result;
+        }
     }
-    else {
-        Result result=productRemarkService.addReamrk(productRemarkDTO);
-        return result;
-    }
-}
+
     @ApiOperation("删除评论(永久删除)")
     @PostMapping("/pdel/{id}")
-    public Result pdelRemark(@PathVariable Integer id)
-    {
-        if(id<0||id==null)
-        {
+    public Result pdelRemark(@PathVariable("id") Integer id) {
+        if(id<0||id==null) {
             return Result.fail("传入参数有问题");
-        }
-        else {
+        } else {
             Result result=productRemarkService.pdelRemark(id);
             return result;
         }
