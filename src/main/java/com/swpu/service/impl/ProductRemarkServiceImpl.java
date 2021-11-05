@@ -13,6 +13,7 @@ import com.swpu.service.ProductRemarkService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.swpu.utils.BeanCopyUtil;
 import com.swpu.utils.DateUtil;
+import com.swpu.utils.SecurityUtil;
 import com.swpu.vo.MenuVo;
 import com.swpu.vo.ProRemarkVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +65,7 @@ public class ProductRemarkServiceImpl extends ServiceImpl<ProductRemarkMapper, P
         }
         ProductRemark remark = BeanCopyUtil.copyObject(productRemarkDTO, ProductRemark.class);
         remark.setIsDelete(Boolean.TRUE);
+        remark.setUserId(SecurityUtil.getUserId());
         remark.setCreateTime(new Date());
         this.save(remark);
         return Result.success("新增成功");

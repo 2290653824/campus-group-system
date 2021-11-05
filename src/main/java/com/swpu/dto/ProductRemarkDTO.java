@@ -18,17 +18,17 @@ public class ProductRemarkDTO implements Serializable {
     private static final long serialVersionUID = -8222569175249995132L;
 
     @ApiModelProperty(value = "用户主键")
-    private Integer userId;
+    private Long userId;
 
     @ApiModelProperty("产品主键")
-    private Integer productId;
+    private Long productId;
 
     @ApiModelProperty("评论内容")
     private String context;
 
     @ApiModelProperty("回复人的主键")
-    private Integer replyId;
+    private Long replyId;
 
     @ApiModelProperty("父评论的主键")
-    private Integer parentId;
+    private Long parentId;
 }

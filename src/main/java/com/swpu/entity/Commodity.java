@@ -59,7 +59,7 @@ public class Commodity implements Serializable {
     private String picPath;
 
     @ApiModelProperty(value = "卖家id")
-    private Integer userId;
+    private Long userId;
 
     @ApiModelProperty(value = "商品数量")
     private Integer count;
