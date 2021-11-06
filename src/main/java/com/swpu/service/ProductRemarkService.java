@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author Liyuxi
@@ -17,6 +17,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface ProductRemarkService extends IService<ProductRemark> {
     /**
      * 逻辑删除评论
+     *
      * @param id
      * @return
      */
@@ -24,6 +25,7 @@ public interface ProductRemarkService extends IService<ProductRemark> {
 
     /**
      * 新增评论
+     *
      * @param productRemarkDTO
      * @return
      */
@@ -31,12 +33,15 @@ public interface ProductRemarkService extends IService<ProductRemark> {
 
     /**
      * 物理删除评论
+     *
      * @param id
      * @return
      */
     Result pdelRemark(Integer id);
+
     /**
      * 分页查询获取
+     *
      * @param queryInfo
      * @return
      */

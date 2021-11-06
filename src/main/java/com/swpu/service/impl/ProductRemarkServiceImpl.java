@@ -95,6 +95,7 @@ public class ProductRemarkServiceImpl extends ServiceImpl<ProductRemarkMapper, P
             qw.like("context", queryInfo.getQueryString());
         }
         qw.isNull("parent_id");
+        qw.eq("is_delete",0);
         IPage<ProductRemark> iPage = super.page(page, qw);
         long total = iPage.getTotal();
         List<ProductRemark> records = iPage.getRecords();
