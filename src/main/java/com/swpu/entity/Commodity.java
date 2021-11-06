@@ -49,8 +49,8 @@ public class Commodity implements Serializable {
     @ApiModelProperty(value = "商品描述")
     private String description;
 
-    @ApiModelProperty(value = "商品品牌")
-    private String brand;
+    @ApiModelProperty(value = "商品分类")
+    private String category;
 
     @ApiModelProperty(value = "商品价格")
     private BigDecimal price;
