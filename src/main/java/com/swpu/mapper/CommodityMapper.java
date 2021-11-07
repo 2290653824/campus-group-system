@@ -1,5 +1,6 @@
 package com.swpu.mapper;
 
+import com.swpu.entity.Category;
 import com.swpu.entity.Commodity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
@@ -23,5 +24,11 @@ public interface CommodityMapper extends BaseMapper<Commodity> {
      * @return List<Commodity>
      */
     List<Commodity> findByName(@Param("name") String name);
+
+    /**
+     * 获取分类信息
+     * @return
+     */
+    List<Category> findCategories(@Param("proId") Long proId);
 
 }

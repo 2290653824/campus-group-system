@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.swpu.mapper.CategoryMapper">
+
+    <select id="findCommodities" resultType="com.swpu.entity.Commodity">
+        SELECT id,name,type,create_time,description,category,price,pic_path,user_id,count,update_time
+        FROM commodity WHERE id IN
+        (SELECT pro_id FROM pro_category WHERE cat_id=#{catId})
+    </select>
+</mapper>

@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.swpu.common.QueryInfo;
 import com.swpu.common.Result;
 import com.swpu.dto.CommodityAddDTO;
+import com.swpu.entity.Category;
 import com.swpu.entity.Commodity;
 import com.swpu.entity.SysPermission;
 import com.swpu.mapper.CommodityMapper;
@@ -32,6 +33,9 @@ import java.util.List;
  */
 @Service
 public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity> implements CommodityService {
+
+    @Autowired
+    private CommodityMapper commodityMapper;
 
     @Override
     public Result SelectById(Integer id) {
@@ -101,6 +105,13 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
         this.updateById(commodity);
         return Result.success("修改成功");
 
+    }
+
+    @Override
+    public Result findCategories(Long proId) {
+        if(proId==null) return Result.fail("参数异常");
+        List<Category> categories = commodityMapper.findCategories(proId);
+        return Result.success("查询分类列表成功",categories);
     }
 
 

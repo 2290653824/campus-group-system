@@ -3,9 +3,21 @@
 <mapper namespace="com.swpu.mapper.CommodityMapper">
 
     <select id="findByName" parameterType="String" resultType="com.swpu.entity.Commodity">
-    SELECT id,name,type,createTime,description,category,price,pic_path,user_id,count,updateTime
+    SELECT
+    id,name,type,createTime,description,category,price,pic_path,user_id,count,updateTime
     FROM commodity
     WHERE name = #{name}
+    </select>
+
+    <select id="findCategories" resultType="com.swpu.entity.Category">
+        SELECT id,name,create_time,update_time,status
+        FROM category
+        WHERE status = 1
+        <if test="proId!=null">
+            AND id IN
+            (SELECT cat_id FROM pro_category WHERE pro_id=#{proId})
+        </if>
+
     </select>
 
 

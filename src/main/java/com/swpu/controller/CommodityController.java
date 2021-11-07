@@ -60,5 +60,11 @@ public class CommodityController {
         return commodityService.updateCommodity(dto);
     }
 
+    @ApiOperation("查询分类列表")
+    @PostMapping("/findCategories")
+    public Result findCategories(Long proId){
+        return commodityService.findCategories(proId);
+    }
+
 
 }

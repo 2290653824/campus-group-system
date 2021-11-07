@@ -2,13 +2,12 @@ package com.swpu.service;
 
 import com.swpu.common.QueryInfo;
 import com.swpu.common.Result;
+import com.swpu.dto.CategoryAddDTO;
 import com.swpu.dto.CommodityAddDTO;
 import com.swpu.entity.Category;
-import com.swpu.entity.Commodity;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.apache.ibatis.annotations.Param;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -17,34 +16,17 @@ import java.util.List;
  * </p>
  *
  * @author Liyuxi
- * @since 2021-11-03
+ * @since 2021-11-06
  */
-public interface CommodityService extends IService<Commodity> {
-
-
+public interface CategoryService extends IService<Category> {
 
     /**
-     * 根据id查找商品
+     * 根据id查找分类
      * @param id
-     * @return Commodity
+     * @return
      */
-    Result SelectById(@Param("id") Integer id);
+    Result selectById(@Param("id") Integer id);
 
-
-    /**
-     * 添加商品
-     * @param dto
-     * @return 影响行数
-     */
-
-    Result insertCommodity(CommodityAddDTO dto);
-
-    /**
-     * 根据id删除商品
-     * @param id
-     * @return 影响行数
-     */
-    Result deleteById(@Param("id") Integer id);
 
     /**
      * 分页条件查询
@@ -53,18 +35,36 @@ public interface CommodityService extends IService<Commodity> {
      */
     Result findPage(QueryInfo queryInfo);
 
+    /**
+     * 添加商品
+     * @param dto
+     * @return 影响行数
+     */
+
+    Result insertCategory(CategoryAddDTO dto);
 
     /**
-     * 修改商品
+     * 根据id删除商品
+     * @param id
+     * @return 影响行数
+     */
+    Result deleteById(@Param("id") Integer id);
+
+
+    /**
+     * 更新分类数据
      * @param dto
      * @return
      */
-    Result updateCommodity(CommodityAddDTO dto);
+    Result updateCategory(CategoryAddDTO dto);
+
 
 
     /**
-     * 获取分类信息
+     * 根据分类id查询出商品列表
+     * @param catId
      * @return
      */
-    Result findCategories(@Param("proId") Long proId);
+    Result findCommodities(@Param("catId") Long catId);
+
 }

@@ -1,15 +1,14 @@
 package com.swpu.entity;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-
 import com.baomidou.mybatisplus.annotation.IdType;
+import java.time.LocalDate;
+
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -19,59 +18,43 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- *
+ * 
  * </p>
  *
  * @author Liyuxi
- * @since 2021-11-03
+ * @since 2021-11-06
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="Commodity对象", description="")
-public class Commodity implements Serializable {
+@ApiModel(value="Category对象", description="")
+public class Category implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键")
+    @ApiModelProperty(value = "id主键")
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @ApiModelProperty(value = "商品名称")
+    @ApiModelProperty(value = "分类名称")
     private String name;
-
-    @ApiModelProperty(value = "商品类型")
-    private String type;
 
     @ApiModelProperty(value = "创建时间")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date createTime;
 
-    @ApiModelProperty(value = "商品描述")
-    private String description;
-
-    @ApiModelProperty(value = "商品分类")
-    private String category;
-
-    @ApiModelProperty(value = "商品价格")
-    private BigDecimal price;
-
-    @ApiModelProperty(value = "商品图片存放位置")
-    private String picPath;
-
-    @ApiModelProperty(value = "卖家id")
-    private Long userId;
-
-    @ApiModelProperty(value = "商品数量")
-    private Integer count;
-
     @ApiModelProperty(value = "修改时间")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date updateTime;
 
+    @ApiModelProperty(value = "是否删除")
+    private Boolean status;
 
-    @ApiModelProperty(value = "分类列表")
+    @ApiModelProperty(value = "该分类下的商品列表")
     @TableField(exist = false)
-    private List<Category> categories;
+    private List<Commodity> commodities;
+
+
+
 
 }
