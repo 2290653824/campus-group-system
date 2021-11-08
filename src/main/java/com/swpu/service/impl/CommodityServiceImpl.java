@@ -8,10 +8,13 @@ import com.swpu.common.Result;
 import com.swpu.dto.CommodityAddDTO;
 import com.swpu.entity.Category;
 import com.swpu.entity.Commodity;
+import com.swpu.entity.ProCategory;
 import com.swpu.entity.SysPermission;
+import com.swpu.mapper.CategoryMapper;
 import com.swpu.mapper.CommodityMapper;
 import com.swpu.service.CommodityService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.swpu.service.ProCategoryService;
 import com.swpu.utils.BeanCopyUtil;
 import com.swpu.utils.SecurityUtil;
 import com.swpu.vo.CommodityVo;
@@ -37,13 +40,18 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
     @Autowired
     private CommodityMapper commodityMapper;
 
+    @Autowired
+    private ProCategoryService proCategoryService;
+
+    @Autowired
+    private CategoryMapper categoryMapper;
+
     @Override
     public Result SelectById(Integer id) {
         if (id == null || id <= 0) {
             return Result.fail("传入的id异常");
         }
         Commodity byId = this.getById(id);
-
         return new Result(true,"根据id查询商品成功",byId);
     }
 
@@ -56,6 +64,16 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
         commodity.setCreateTime(new Date());
         commodity.setUpdateTime(new Date());
         this.save(commodity);
+        if (dto.getCategoryList() != null && dto.getCategoryList().size() > 0){
+            //新增商品-分类关联表的关联关系
+            List<Category> categoryList = dto.getCategoryList();
+            categoryList.forEach(data->{
+                ProCategory proCategory = new ProCategory();
+                proCategory.setProId(commodity.getId());
+                proCategory.setCatId(data.getId());
+                proCategoryService.save(proCategory);
+            });
+        }
         return Result.success("添加商品成功");
     }
 
@@ -89,6 +107,9 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
         List<Commodity> records = iPage.getRecords();
         long total = iPage.getTotal();
         List<CommodityVo> commodityVos = BeanCopyUtil.copyList(records, CommodityVo.class);
+        commodityVos.forEach(data->{
+            data.setCategoryList(categoryMapper.findCategoryByCommodityId(data.getId()));
+        });
         Page<CommodityVo> voPage = new Page<>();
         voPage.setRecords(commodityVos);
         voPage.setTotal(total);
@@ -97,11 +118,24 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
 
     @Override
     public Result updateCommodity(CommodityAddDTO dto) {
-        if(dto == null){
+        if(dto.getId() == null){
             return Result.fail("参数异常");
         }
         Commodity commodity=BeanCopyUtil.copyObject(dto,Commodity.class);
         commodity.setUpdateTime(new Date());
+        if (dto.getCategoryList() != null && dto.getCategoryList().size() > 0) {
+            //先删除原有的商品-分类关联关系
+            proCategoryService.remove(
+                    new QueryWrapper<ProCategory>().eq("pro_id",dto.getId()));
+            //新增商品-分类关联表的关联关系
+            List<Category> categoryList = dto.getCategoryList();
+            categoryList.forEach(data -> {
+                ProCategory proCategory = new ProCategory();
+                proCategory.setProId(commodity.getId());
+                proCategory.setCatId(data.getId());
+                proCategoryService.save(proCategory);
+            });
+        }
         this.updateById(commodity);
         return Result.success("修改成功");
 

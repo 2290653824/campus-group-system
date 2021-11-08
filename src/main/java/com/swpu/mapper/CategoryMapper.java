@@ -25,4 +25,11 @@ public interface CategoryMapper extends BaseMapper<Category> {
      * @return
      */
     List<Category> findCommodities(@Param("catId") Long catId);
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    List<Category> findCategoryByCommodityId(@Param("id")Long id);
 }

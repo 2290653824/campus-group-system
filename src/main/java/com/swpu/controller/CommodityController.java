@@ -30,14 +30,14 @@ public class CommodityController {
 
     @ApiOperation("根据id删除商品")
     @PostMapping("/del/{id}")
-    public Result deleteById(@PathVariable Integer id){
+    public Result deleteById(@PathVariable("id") Integer id){
         return commodityService.deleteById(id);
     }
 
 
     @ApiOperation("根据id查询商品")
     @PostMapping("/findById/{id}")
-    public Result findById(@PathVariable Integer id){
+    public Result findById(@PathVariable("id") Integer id){
         return commodityService.SelectById(id);
     }
 
@@ -56,7 +56,7 @@ public class CommodityController {
 
     @ApiOperation(("修改商品"))
     @PostMapping("/updateCommodity")
-    public Result updateCommodity(CommodityAddDTO dto){
+    public Result updateCommodity(@RequestBody CommodityAddDTO dto){
         return commodityService.updateCommodity(dto);
     }
 
