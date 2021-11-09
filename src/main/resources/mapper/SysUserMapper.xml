@@ -20,7 +20,7 @@
     <select id="findMenus" resultType="com.swpu.entity.SysMenu">
         SELECT id,`path`,icon,title,component,parent_id,status
         FROM sys_menu
-        WHERE status = 1
+        WHERE status = 1 AND parent_id is null
         <if test="userId != null">
             AND id IN
             (SELECT menu_id FROM roles_menus WHERE role_id IN
