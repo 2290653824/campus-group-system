@@ -64,4 +64,11 @@ public class SysMenuController {
         return Result.fail("删除失败!");
     }
 
+    @GetMapping("findParent")
+    @ApiOperation("查询所有菜单")
+    public Result findParent(){
+        return sysMenuService.findParent();
+    }
+
+
 }

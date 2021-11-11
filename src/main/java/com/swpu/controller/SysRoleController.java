@@ -53,4 +53,10 @@ public class SysRoleController {
         return sysRoleService.deleteRole(id);
     }
 
+    @GetMapping("findAll")
+    @ApiOperation("查询所有")
+    public Result findAll(){
+        return sysRoleService.findAll();
+    }
+
 }

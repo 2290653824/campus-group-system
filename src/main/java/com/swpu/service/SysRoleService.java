@@ -43,4 +43,10 @@ public interface SysRoleService extends IService<SysRole> {
      * @return
      */
     Result deleteRole(Long id);
+
+    /**
+     * 查询所有
+     * @return
+     */
+    Result findAll();
 }

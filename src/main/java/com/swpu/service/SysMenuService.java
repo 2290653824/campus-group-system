@@ -36,4 +36,10 @@ public interface SysMenuService extends IService<SysMenu> {
      * @return
      */
     Result findPage(QueryInfo queryInfo);
+
+    /**
+     * 查询父级菜单
+     * @return
+     */
+    Result findParent();
 }

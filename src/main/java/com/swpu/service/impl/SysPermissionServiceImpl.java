@@ -96,5 +96,11 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
         return Result.success("查询成功",voPage);
     }
 
+    @Override
+    public Result findAll() {
+        List<SysPermission> list = this.list();
+        return Result.success("所有权限数据",list);
+    }
+
 
 }

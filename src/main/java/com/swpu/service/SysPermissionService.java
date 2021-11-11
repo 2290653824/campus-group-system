@@ -36,4 +36,10 @@ public interface SysPermissionService extends IService<SysPermission> {
      * @return
      */
     Result findPage(QueryInfo queryInfo);
+
+    /**
+     * 查询所有
+     * @return
+     */
+    Result findAll();
 }

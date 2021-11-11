@@ -184,4 +184,10 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         }
         return Result.fail("删除失败");
     }
+
+    @Override
+    public Result findAll() {
+        List<SysRole> list = this.list();
+        return Result.success("所有角色数据",list);
+    }
 }

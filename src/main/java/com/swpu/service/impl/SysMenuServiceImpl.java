@@ -87,4 +87,15 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         voPage.setRecords(menuVos);
         return Result.success("分页数据",voPage);
     }
+
+    @Override
+    public Result findParent() {
+        QueryWrapper<SysMenu> qw = new QueryWrapper<>();
+        qw.isNull("parent_id");
+        List<SysMenu> list = this.list(qw);
+        list.forEach(data->{
+            data.setChildren(sysMenuMapper.findChildrenMenu(data.getId()));
+        });
+        return Result.success("菜单数据",list);
+    }
 }

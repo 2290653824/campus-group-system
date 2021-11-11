@@ -61,4 +61,10 @@ public class SysPermissionController {
         return Result.success("删除失败!");
     }
 
+
+    @GetMapping("findAll")
+    @ApiOperation("查询所有")
+    public Result findAll(){
+        return sysPermissionService.findAll();
+    }
 }
