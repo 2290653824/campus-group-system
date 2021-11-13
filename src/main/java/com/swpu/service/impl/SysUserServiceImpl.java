@@ -101,7 +101,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             return Result.fail("参数不能为空");
         }
         QueryWrapper<SysUser> qw = new QueryWrapper<>();
-        qw.eq("user_name",dto.getUsername());
+        qw.eq("username",dto.getUsername());
         qw.last("limit 1");
         SysUser one = this.getOne(qw);
         if (one != null){
@@ -109,6 +109,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         }
         SysUser sysUser = BeanCopyUtil.copyObject(dto, SysUser.class);
         sysUser.setPassword(passwordEncoder.encode(MD5Util.md5(sysUser.getPassword())));
+        sysUser.setAdmin(Boolean.FALSE);
         this.save(sysUser);
         //新增用户-角色关系
         if (dto.getRoles() != null && dto.getRoles().size() > 0){

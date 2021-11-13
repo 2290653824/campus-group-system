@@ -8,6 +8,12 @@ spring:
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+  #图片大小限制
+  servlet:
+    multipart:
+      max-file-size: 40MB
+      max-request-size: 100MB
+
   redis:
     port: 6379
     host: 120.76.133.50
